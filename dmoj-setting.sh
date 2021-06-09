@@ -21,3 +21,11 @@ sudo apt-get install -y git gcc g++ make python3-dev python3-pip libxml2-dev lib
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo npm install -g sass postcss-cli postcss autoprefixer
+
+## Creating the database
+echo "======================Creating the database========================="
+sudo apt-get update
+sudo apt-get install -y mariadb-server libmysqlclient-dev
+sudo mysql -e "CREATE DATABASE dmoj DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_general_ci"
+sudo mysql -e "GRANT ALL PRIVILEGES ON dmoj.* to 'dmoj'@'localhost' IDENTIFIED BY '1234'" # 비밀번호를 설정하세요. ex) 1234
+
