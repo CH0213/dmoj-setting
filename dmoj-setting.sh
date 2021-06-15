@@ -40,3 +40,17 @@ cd site
 git checkout v2.1.0  # only if planning to install a judge from PyPI, otherwise skip this step
 git submodule init
 git submodule update
+
+cd dmoj
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/local_settings.py
+sed -i 's/<password>/1234/g' local_settings.py # 비밀번호를 설정하세요. ex) 1234
+echo "Setting the password for [local_settings.py]"
+sed -i 's/#CELERY_BROKER_URL/CELERY_BROKER_URL/g' local_settings.py
+echo "Setting the CELERY_BROKER_URL for [local_settings.py]"
+sed -i 's/#CELERY_RESULT_BACKEND/CELERY_RESULT_BACKEND/g' local_settings.py
+echo "Setting the CELERY_RESULT_BACKEND for [local_settings.py]"
+cd ..
+
+pip install wheel
+pip3 install -r requirements.txt
+pip3 install mysqlclient
