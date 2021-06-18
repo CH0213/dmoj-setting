@@ -54,3 +54,10 @@ cd ..
 pip install wheel
 pip3 install -r requirements.txt
 pip3 install mysqlclient
+
+## Compiling assets
+echo "======================Compiling assets============================="
+./make_style.sh
+python3 manage.py collectstatic
+python3 manage.py compilemessages
+python3 manage.py compilejsi18n
