@@ -61,3 +61,13 @@ echo "======================Compiling assets============================="
 python3 manage.py collectstatic
 python3 manage.py compilemessages
 python3 manage.py compilejsi18n
+
+## Setting up datebase tables
+echo "======================Setting up datebase tables======================"
+python3 manage.py migrate
+
+python3 manage.py loaddata navbar
+python3 manage.py loaddata language_small
+python3 manage.py loaddata demo
+echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('kch', 'cndghks0213@gmail.com', '1234')" | python manage.py shell
+# 이름, 이메일, 비밀번호를 설정하세요.
