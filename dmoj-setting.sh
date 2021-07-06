@@ -71,3 +71,7 @@ python3 manage.py loaddata language_small
 python3 manage.py loaddata demo
 echo "from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('kch', 'cndghks0213@gmail.com', '1234')" | python manage.py shell
 # 이름, 이메일, 비밀번호를 설정하세요.
+
+## Setting up Celery
+echo "======================Setting up Celery============================"
+sudo service redis-server start
