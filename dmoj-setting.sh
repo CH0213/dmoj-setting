@@ -75,3 +75,8 @@ echo "from django.contrib.auth import get_user_model; User = get_user_model(); U
 ## Setting up Celery
 echo "======================Setting up Celery============================"
 sudo service redis-server start
+
+## Running the server
+echo "======================Running the server==========================="
+# python3 manage.py runbridged
+pip install redis
