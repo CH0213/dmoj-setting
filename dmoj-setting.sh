@@ -80,3 +80,20 @@ sudo service redis-server start
 echo "======================Running the server==========================="
 # python3 manage.py runbridged
 pip install redis
+
+## Setting up uWSGI
+echo "======================Setting up uWSGI============================"
+pip3 install uwsgi
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/uwsgi.ini
+SITE_PWD=$(pwd)
+cd ..
+cd dmojsite
+DMOJ_PWD=$(pwd)
+cd ..
+cd site
+
+sudo sed -i "s@<dmoj repo dir>@$SITE_PWD@g" uwsgi.ini
+echo "Setting the <dmoj repo dir> for [uwsgi.ini]"
+sudo sed -i "s@<virtualenv path>@$DMOJ_PWD@g" uwsgi.ini
+echo "Setting the <virtualenv path> for [uwsgi.ini]"
+# uwsgi --ini uwsgi.ini
