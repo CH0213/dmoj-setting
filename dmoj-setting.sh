@@ -97,3 +97,21 @@ echo "Setting the <dmoj repo dir> for [uwsgi.ini]"
 sudo sed -i "s@<virtualenv path>@$DMOJ_PWD@g" uwsgi.ini
 echo "Setting the <virtualenv path> for [uwsgi.ini]"
 # uwsgi --ini uwsgi.ini
+
+## Setting up supervisord
+echo "======================Setting up supervisord========================="
+sudo apt-get install -y supervisor
+cd /etc/supervisor/conf.d/
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/site.conf
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/bridged.conf
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/celery.conf
+
+sudo sed -i "s@<path to virtualenv>@$DMOJ_PWD@g" *
+echo "Setting the <path to virtualenv> for [*.conf]"
+sudo sed -i "s@<path to site>@$SITE_PWD@g" *
+echo "Setting the <path to site> for [*.conf]"
+sudo sed -i "s@<user to run under>@root@g" *
+echo "Setting the <user to run under> for [*.conf]"
+
+sudo supervisorctl update
+sudo supervisorctl status
