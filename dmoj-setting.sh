@@ -115,3 +115,20 @@ echo "Setting the <user to run under> for [*.conf]"
 
 sudo supervisorctl update
 sudo supervisorctl status
+
+## Setting up nginx
+echo "======================Setting up nginx============================="
+sudo apt-get install -y nginx
+cd /etc/nginx/conf.d
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/nginx.conf
+
+STATIC="/tmp/static"
+sudo sed -i "s@<hostname>@site@g" nginx.conf
+echo "Setting the <hostname> for [nginx.conf]"
+sudo sed -i "s@<site code path>@$SITE_PWD@g" nginx.conf
+echo "Setting the <site code path> for [nginx.conf]"
+sudo sed -i "s@<django setting STATIC_ROOT, without the final /static>@$STATIC@g" nginx.conf
+echo "Setting the <django setting STATIC_ROOT, without the final /static> for [nginx.conf]"
+
+sudo nginx -t
+sudo service nginx reload
