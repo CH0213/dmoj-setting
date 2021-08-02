@@ -151,3 +151,22 @@ EOF
 
 npm install qu ws simplesets
 pip3 install websocket-client
+
+npm install qu ws simplesets
+pip3 install websocket-client
+
+cd /etc/supervisor/conf.d/
+
+sudo wget https://github.com/DMOJ/docs/raw/master/sample_files/wsevent.conf
+sudo sed -i "s@<site repo path>@$SITE_PWD@g" wsevent.conf
+echo "Setting the <site code path> for [wsevent.conf]"
+sudo sed -i "s@<username>@root@g" wsevent.conf
+echo "Setting the <username> for [wsevent.conf]"
+
+sudo supervisorctl update
+sudo supervisorctl restart bridged
+sudo supervisorctl restart site
+sudo service nginx restart
+
+cd ~/site
+python3 manage.py runserver 0.0.0.0:8000
